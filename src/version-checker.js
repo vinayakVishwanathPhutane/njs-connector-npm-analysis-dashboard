@@ -66,7 +66,10 @@ class VersionChecker {
 
     try {
       const response = await axios.get(`${NPM_REGISTRY}/${packageName}`, {
-        timeout: 10000
+        timeout: 15000,
+        headers: {
+          'Accept': 'application/json'
+        }
       });
 
       const latestVersion = response.data['dist-tags']?.latest;
@@ -89,6 +92,10 @@ class VersionChecker {
       if (error.response?.status === 404) {
         console.log(`    ⚠ Package not found: ${packageName}`);
         return { error: 'Package not found', latest: null };
+      }
+      if (error.code === 'ECONNABORTED' || error.code === 'ETIMEDOUT') {
+        console.error(`    ✗ Timeout fetching ${packageName}`);
+        return { error: 'Timeout', latest: null };
       }
       console.error(`    ✗ Error fetching ${packageName}:`, error.message);
       return { error: error.message, latest: null };
@@ -247,11 +254,33 @@ async function main() {
   
   try {
     await checker.loadAnalysisResults();
+    
+    if (checker.analysisResults.length === 0) {
+      console.error('\n❌ No analysis results found. Please run analyzer first.');
+      process.exit(1);
+    }
+    
     const enrichedResults = await checker.checkAllRepositories();
+    
+    // Always save results, even if some packages failed
     await checker.saveEnrichedResults(enrichedResults);
     console.log('\n✅ Version checking completed successfully!\n');
   } catch (error) {
     console.error('\n❌ Version checking failed:', error.message);
+    console.error('Stack trace:', error.stack);
+    
+    // Try to save whatever results we have
+    if (checker.analysisResults.length > 0) {
+      console.log('\n⚠️  Attempting to save partial results...');
+      try {
+        const outputPath = path.join(DATA_DIR, 'enriched-results.json');
+        await fs.writeJson(outputPath, checker.analysisResults, { spaces: 2 });
+        console.log('✓ Partial results saved');
+      } catch (saveError) {
+        console.error('✗ Failed to save partial results:', saveError.message);
+      }
+    }
+    
     process.exit(1);
   }
 }
