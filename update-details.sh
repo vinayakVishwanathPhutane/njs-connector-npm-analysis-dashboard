@@ -27,22 +27,10 @@ npm run analyze >> "$LOG_FILE" 2>&1
 if [ $? -eq 0 ]; then
     log_message "Update completed successfully!"
     
-    # Find and kill the existing server process
     log_message "Stopping existing server..."
-    SERVER_PID=$(lsof -ti:3001)
-    if [ ! -z "$SERVER_PID" ]; then
-        kill -9 $SERVER_PID
-        log_message "Server stopped (PID: $SERVER_PID)"
-        sleep 2
-    else
-        log_message "No server running on port 3001"
-    fi
-    
-    # Restart the server
-    log_message "Starting server..."
-    PORT=3001 npm run serve >> "$LOG_FILE" 2>&1 &
-    SERVER_NEW_PID=$!
-    log_message "Server started with PID: $SERVER_NEW_PID"
+    pm2 stop all
+
+    pm2 restart my-app || pm2 start npm --name "my-app" -- run start
     
 else
     log_message "ERROR: Update failed with exit code $?"
