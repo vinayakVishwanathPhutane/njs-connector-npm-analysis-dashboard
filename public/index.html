@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NPM Package Analytics Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>📦 NPM Package Analytics Dashboard</h1>
+                <div class="header-actions">
+                    <button id="refreshBtn" class="btn btn-primary">
+                        <span class="icon">🔄</span> Refresh Data
+                    </button>
+                    <div class="last-updated" id="lastUpdated">
+                        Last updated: <span id="updateTime">-</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="tabs">
+            <button class="tab-btn active" data-tab="overview">📊 Overview</button>
+            <button class="tab-btn" data-tab="repositories">📁 Repositories</button>
+            <button class="tab-btn" data-tab="packages">📦 Packages</button>
+            <button class="tab-btn" data-tab="analytics">📈 Analytics</button>
+        </nav>
+
+        <!-- Loading State -->
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Loading data...</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="error" class="error-container" style="display: none;">
+            <div class="error-content">
+                <span class="icon">⚠️</span>
+                <h2>Error Loading Data</h2>
+                <p id="errorMessage"></p>
+                <button onclick="location.reload()" class="btn btn-primary">Retry</button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main id="mainContent" style="display: none;">
+            
+            <!-- Overview Tab -->
+            <div id="overview" class="tab-content active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📁</div>
+                        <div class="stat-info">
+                            <div class="stat-label">Total Repositories</div>
+                            <div class="stat-value" id="totalRepos">0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📦</div>
+                        <div class="stat-info">
+                            <div class="stat-label">Total Packages</div>
+                            <div class="stat-value" id="totalPackages">0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card success">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-info">
+                            <div class="stat-label">Up to Date</div>
+                            <div class="stat-value" id="upToDate">0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-icon">⚠️</div>
+                        <div class="stat-info">
+                            <div class="stat-label">Outdated</div>
+                            <div class="stat-value" id="outdated">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <h3>Package Status Distribution</h3>
+                        <canvas id="statusChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Packages by Repository</h3>
+                        <canvas id="repoChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card full-width">
+                    <h3>Update Type Distribution</h3>
+                    <canvas id="updateTypeChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Repositories Tab -->
+            <div id="repositories" class="tab-content">
+                <div class="section-header">
+                    <h2>Repository Overview</h2>
+                    <div class="search-box">
+                        <input type="text" id="repoSearch" placeholder="Search repositories...">
+                    </div>
+                </div>
+                <div id="repoList" class="repo-list"></div>
+            </div>
+
+            <!-- Packages Tab -->
+            <div id="packages" class="tab-content">
+                <div class="section-header">
+                    <h2>All Packages</h2>
+                    <div class="filter-controls">
+                        <input type="text" id="packageSearch" placeholder="Search packages...">
+                        <select id="statusFilter">
+                            <option value="all">All Status</option>
+                            <option value="outdated">Outdated</option>
+                            <option value="up-to-date">Up to Date</option>
+                            <option value="unknown">Unknown</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="packageList" class="package-list"></div>
+            </div>
+
+            <!-- Analytics Tab -->
+            <div id="analytics" class="tab-content">
+                <div class="analytics-grid">
+                    <div class="chart-card">
+                        <h3>Most Used Packages</h3>
+                        <canvas id="topPackagesChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Dependency Types</h3>
+                        <canvas id="depTypesChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="chart-card full-width">
+                    <h3>Repository Health Score</h3>
+                    <canvas id="healthScoreChart"></canvas>
+                </div>
+
+                <div class="insights-section">
+                    <h3>📊 Key Insights</h3>
+                    <div id="insights" class="insights-list"></div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

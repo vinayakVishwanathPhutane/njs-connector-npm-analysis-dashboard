@@ -1,0 +1,27 @@
+{
+  "name": "npm-package-analytics-dashboard",
+  "version": "1.0.0",
+  "description": "Analytics dashboard for tracking npm packages across multiple repositories",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "analyze": "node src/analyzer.js",
+    "serve": "node src/server.js",
+    "start": "npm run analyze && npm run serve"
+  },
+  "keywords": [
+    "npm",
+    "analytics",
+    "dashboard",
+    "package-management"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "simple-git": "^3.22.0",
+    "semver": "^7.5.4",
+    "axios": "^1.6.5",
+    "fs-extra": "^11.2.0"
+  }
+}

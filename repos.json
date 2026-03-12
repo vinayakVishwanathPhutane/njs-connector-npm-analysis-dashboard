@@ -1,0 +1,642 @@
+[
+  {
+    "name": "connector-njs-lob",
+    "url": "https://github.com/ibm-webmethods/connector-njs-lob.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-abstract-ip-geolocation",
+    "url": "https://github.com/ibm-webmethods/connector-njs-abstract-ip-geolocation.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-aha-actions",
+    "url": "https://github.com/ibm-webmethods/connector-njs-aha-actions.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-aha-triggers",
+    "url": "https://github.com/ibm-webmethods/connector-njs-aha-triggers.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-aleph-alpha",
+    "url": "https://github.com/ibm-webmethods/connector-njs-aleph-alpha.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-amazon-web-services",
+    "url": "https://github.com/ibm-webmethods/connector-njs-amazon-web-services.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-asana-actions",
+    "url": "https://github.com/ibm-webmethods/connector-njs-asana-actions.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-asana-triggers",
+    "url": "https://github.com/ibm-webmethods/connector-njs-asana-triggers.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-basecamp-3",
+    "url": "https://github.com/ibm-webmethods/connector-njs-basecamp-3.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-beanstalk",
+    "url": "https://github.com/ibm-webmethods/connector-njs-beanstalk.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-bitbns",
+    "url": "https://github.com/ibm-webmethods/connector-njs-bitbns.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-bitbucket-actions",
+    "url": "https://github.com/ibm-webmethods/connector-njs-bitbucket-actions.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-bitbucket-triggers",
+    "url": "https://github.com/ibm-webmethods/connector-njs-bitbucket-triggers.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-bitly",
+    "url": "https://github.com/ibm-webmethods/connector-njs-bitly.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-abstract-email-validation",
+    "url": "https://github.com/ibm-webmethods/connector-njs-abstract-email-validation.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-box-actions",
+    "url": "https://github.com/ibm-webmethods/connector-njs-box-actions.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-abstract-holidays",
+    "url": "https://github.com/ibm-webmethods/connector-njs-abstract-holidays.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-box-triggers",
+    "url": "https://github.com/ibm-webmethods/connector-njs-box-triggers.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-abstract-phone-validation",
+    "url": "https://github.com/ibm-webmethods/connector-njs-abstract-phone-validation.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-chatgpt",
+    "url": "https://github.com/ibm-webmethods/connector-njs-chatgpt.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-addthis",
+    "url": "https://github.com/ibm-webmethods/connector-njs-addthis.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-cisco-webex-teams",
+    "url": "https://github.com/ibm-webmethods/connector-njs-cisco-webex-teams.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-cisco-webex-teams-bot",
+    "url": "https://github.com/ibm-webmethods/connector-njs-cisco-webex-teams-bot.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-confluence-cloud-actions",
+    "url": "https://github.com/ibm-webmethods/connector-njs-confluence-cloud-actions.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-contentstack",
+    "url": "https://github.com/ibm-webmethods/connector-njs-contentstack.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-confluence-cloud-triggers",
+    "url": "https://github.com/ibm-webmethods/connector-njs-confluence-cloud-triggers.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-copper",
+    "url": "https://github.com/ibm-webmethods/connector-njs-copper.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-google-maps",
+    "url": "https://github.com/ibm-webmethods/connector-njs-google-maps.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-dialogflow",
+    "url": "https://github.com/ibm-webmethods/connector-njs-dialogflow.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-google-places",
+    "url": "https://github.com/ibm-webmethods/connector-njs-google-places.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-docuware",
+    "url": "https://github.com/ibm-webmethods/connector-njs-docuware.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-google-sheets-actions1",
+    "url": "https://github.com/ibm-webmethods/connector-njs-google-sheets-actions1.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-dropbox",
+    "url": "https://github.com/ibm-webmethods/connector-njs-dropbox.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-google-sheets-actions2",
+    "url": "https://github.com/ibm-webmethods/connector-njs-google-sheets-actions2.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-dropbox-sign",
+    "url": "https://github.com/ibm-webmethods/connector-njs-dropbox-sign.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-google-tasks",
+    "url": "https://github.com/ibm-webmethods/connector-njs-google-tasks.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-egnyte",
+    "url": "https://github.com/ibm-webmethods/connector-njs-egnyte.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-eventbrite",
+    "url": "https://github.com/ibm-webmethods/connector-njs-eventbrite.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-gotomeeting",
+    "url": "https://github.com/ibm-webmethods/connector-njs-gotomeeting.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-evernote-actions",
+    "url": "https://github.com/ibm-webmethods/connector-njs-evernote-actions.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-gotowebinar",
+    "url": "https://github.com/ibm-webmethods/connector-njs-gotowebinar.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-evernote-triggers",
+    "url": "https://github.com/ibm-webmethods/connector-njs-evernote-triggers.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-heroku",
+    "url": "https://github.com/ibm-webmethods/connector-njs-heroku.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-freshdesk-actions",
+    "url": "https://github.com/ibm-webmethods/connector-njs-freshdesk-actions.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-http-oauth",
+    "url": "https://github.com/ibm-webmethods/connector-njs-http-oauth.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-freshdesk-triggers",
+    "url": "https://github.com/ibm-webmethods/connector-njs-freshdesk-triggers.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-hubspot",
+    "url": "https://github.com/ibm-webmethods/connector-njs-hubspot.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-freshsales",
+    "url": "https://github.com/ibm-webmethods/connector-njs-freshsales.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-intercom",
+    "url": "https://github.com/ibm-webmethods/connector-njs-intercom.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-github",
+    "url": "https://github.com/ibm-webmethods/connector-njs-github.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-jira",
+    "url": "https://github.com/ibm-webmethods/connector-njs-jira.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-gitlab",
+    "url": "https://github.com/ibm-webmethods/connector-njs-gitlab.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-jotform",
+    "url": "https://github.com/ibm-webmethods/connector-njs-jotform.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-google-analytics",
+    "url": "https://github.com/ibm-webmethods/connector-njs-google-analytics.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-json-tools",
+    "url": "https://github.com/ibm-webmethods/connector-njs-json-tools.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-google-calendar",
+    "url": "https://github.com/ibm-webmethods/connector-njs-google-calendar.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-linkedin",
+    "url": "https://github.com/ibm-webmethods/connector-njs-linkedin.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-google-drive",
+    "url": "https://github.com/ibm-webmethods/connector-njs-google-drive.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-magento-2_3",
+    "url": "https://github.com/ibm-webmethods/connector-njs-magento-2_3.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-google-forms",
+    "url": "https://github.com/ibm-webmethods/connector-njs-google-forms.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-magento-2_4",
+    "url": "https://github.com/ibm-webmethods/connector-njs-magento-2_4.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-google-gmail",
+    "url": "https://github.com/ibm-webmethods/connector-njs-google-gmail.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-mailchimp",
+    "url": "https://github.com/ibm-webmethods/connector-njs-mailchimp.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-microsoft-excel-online",
+    "url": "https://github.com/ibm-webmethods/connector-njs-microsoft-excel-online.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-mention",
+    "url": "https://github.com/ibm-webmethods/connector-njs-mention.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-microsoft-office-365",
+    "url": "https://github.com/ibm-webmethods/connector-njs-microsoft-office-365.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-microsoft-azure-devops-triggers",
+    "url": "https://github.com/ibm-webmethods/connector-njs-microsoft-azure-devops-triggers.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-microsoft-onedrive-actions",
+    "url": "https://github.com/ibm-webmethods/connector-njs-microsoft-onedrive-actions.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-microsoft-onedrive-for-business-actions",
+    "url": "https://github.com/ibm-webmethods/connector-njs-microsoft-onedrive-for-business-actions.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-microsoft-onedrive-for-business-triggers",
+    "url": "https://github.com/ibm-webmethods/connector-njs-microsoft-onedrive-for-business-triggers.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-microsoft-onedrive-triggers",
+    "url": "https://github.com/ibm-webmethods/connector-njs-microsoft-onedrive-triggers.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-microsoft-onenote-actions",
+    "url": "https://github.com/ibm-webmethods/connector-njs-microsoft-onenote-actions.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-microsoft-onenote-triggers",
+    "url": "https://github.com/ibm-webmethods/connector-njs-microsoft-onenote-triggers.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-philips-hue",
+    "url": "https://github.com/ibm-webmethods/connector-njs-philips-hue.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-pipedrive-actions",
+    "url": "https://github.com/ibm-webmethods/connector-njs-pipedrive-actions.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-microsoft-sharepoint-online-actions",
+    "url": "https://github.com/ibm-webmethods/connector-njs-microsoft-sharepoint-online-actions.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-pipedrive-triggers",
+    "url": "https://github.com/ibm-webmethods/connector-njs-pipedrive-triggers.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-microsoft-sharepoint-online-triggers",
+    "url": "https://github.com/ibm-webmethods/connector-njs-microsoft-sharepoint-online-triggers.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-pivotal-tracker",
+    "url": "https://github.com/ibm-webmethods/connector-njs-pivotal-tracker.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-microsoft-teams",
+    "url": "https://github.com/ibm-webmethods/connector-njs-microsoft-teams.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-plotly",
+    "url": "https://github.com/ibm-webmethods/connector-njs-plotly.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-microsoft-to-do",
+    "url": "https://github.com/ibm-webmethods/connector-njs-microsoft-to-do.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-pubnub",
+    "url": "https://github.com/ibm-webmethods/connector-njs-pubnub.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-mixpanel",
+    "url": "https://github.com/ibm-webmethods/connector-njs-mixpanel.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-rss-feeds",
+    "url": "https://github.com/ibm-webmethods/connector-njs-rss-feeds.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-moxtra",
+    "url": "https://github.com/ibm-webmethods/connector-njs-moxtra.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-runscope",
+    "url": "https://github.com/ibm-webmethods/connector-njs-runscope.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-nimble",
+    "url": "https://github.com/ibm-webmethods/connector-njs-nimble.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-salesforce-actions",
+    "url": "https://github.com/ibm-webmethods/connector-njs-salesforce-actions.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-office365",
+    "url": "https://github.com/ibm-webmethods/connector-njs-office365.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-salesforce-triggers",
+    "url": "https://github.com/ibm-webmethods/connector-njs-salesforce-triggers.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-okta",
+    "url": "https://github.com/ibm-webmethods/connector-njs-okta.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-servicenow",
+    "url": "https://github.com/ibm-webmethods/connector-njs-servicenow.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-outreach",
+    "url": "https://github.com/ibm-webmethods/connector-njs-outreach.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-shopify",
+    "url": "https://github.com/ibm-webmethods/connector-njs-shopify.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-pagerduty",
+    "url": "https://github.com/ibm-webmethods/connector-njs-pagerduty.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-sitecore-content-hub",
+    "url": "https://github.com/ibm-webmethods/connector-njs-sitecore-content-hub.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-pagerduty-v2",
+    "url": "https://github.com/ibm-webmethods/connector-njs-pagerduty-v2.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-siteleaf",
+    "url": "https://github.com/ibm-webmethods/connector-njs-siteleaf.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-test",
+    "url": "https://github.com/ibm-webmethods/connector-njs-test.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-slack",
+    "url": "https://github.com/ibm-webmethods/connector-njs-slack.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-todoist-actions",
+    "url": "https://github.com/ibm-webmethods/connector-njs-todoist-actions.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-smartsheet-actions",
+    "url": "https://github.com/ibm-webmethods/connector-njs-smartsheet-actions.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-todoist-triggers",
+    "url": "https://github.com/ibm-webmethods/connector-njs-todoist-triggers.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-smartsheet-triggers",
+    "url": "https://github.com/ibm-webmethods/connector-njs-smartsheet-triggers.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-toodledo",
+    "url": "https://github.com/ibm-webmethods/connector-njs-toodledo.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-softvu",
+    "url": "https://github.com/ibm-webmethods/connector-njs-softvu.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-transform",
+    "url": "https://github.com/ibm-webmethods/connector-njs-transform.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-statuspage",
+    "url": "https://github.com/ibm-webmethods/connector-njs-statuspage.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-trello",
+    "url": "https://github.com/ibm-webmethods/connector-njs-trello.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-surveymonkey",
+    "url": "https://github.com/ibm-webmethods/connector-njs-surveymonkey.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-twitter",
+    "url": "https://github.com/ibm-webmethods/connector-njs-twitter.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-uservoice",
+    "url": "https://github.com/ibm-webmethods/connector-njs-uservoice.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-weather-underground",
+    "url": "https://github.com/ibm-webmethods/connector-njs-weather-underground.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-zsuite",
+    "url": "https://github.com/ibm-webmethods/connector-njs-zsuite.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-webflow",
+    "url": "https://github.com/ibm-webmethods/connector-njs-webflow.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-webmaster-tools",
+    "url": "https://github.com/ibm-webmethods/connector-njs-webmaster-tools.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-workspan-actions",
+    "url": "https://github.com/ibm-webmethods/connector-njs-workspan-actions.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-workspan-triggers",
+    "url": "https://github.com/ibm-webmethods/connector-njs-workspan-triggers.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-wrike-actions",
+    "url": "https://github.com/ibm-webmethods/connector-njs-wrike-actions.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-wrike-triggers",
+    "url": "https://github.com/ibm-webmethods/connector-njs-wrike-triggers.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-zendesk",
+    "url": "https://github.com/ibm-webmethods/connector-njs-zendesk.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-zoho-crm-actions",
+    "url": "https://github.com/ibm-webmethods/connector-njs-zoho-crm-actions.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-zoho-crm-triggers",
+    "url": "https://github.com/ibm-webmethods/connector-njs-zoho-crm-triggers.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-zoho-mail",
+    "url": "https://github.com/ibm-webmethods/connector-njs-zoho-mail.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-zoho-projects",
+    "url": "https://github.com/ibm-webmethods/connector-njs-zoho-projects.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-abo-agent",
+    "url": "https://github.com/ibm-webmethods/connector-njs-abo-agent.git",
+    "branch": "main"
+  },
+  {
+    "name": "connector-njs-activecampaign-actions",
+    "url": "https://github.com/ibm-webmethods/connector-njs-activecampaign-actions.git",
+    "branch": "main"
+  }
+]
