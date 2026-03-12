@@ -21,11 +21,23 @@ class VersionChecker {
   async loadAnalysisResults() {
     const resultsPath = path.join(DATA_DIR, 'analysis-results.json');
     
+    console.log(`📂 Looking for analysis results at: ${resultsPath}`);
+    
     try {
+      const exists = await fs.pathExists(resultsPath);
+      if (!exists) {
+        throw new Error(`File not found: ${resultsPath}`);
+      }
+      
       this.analysisResults = await fs.readJson(resultsPath);
       console.log(`✓ Loaded analysis results for ${this.analysisResults.length} repositories`);
+      
+      if (this.analysisResults.length === 0) {
+        console.warn('⚠️  Warning: Analysis results file is empty!');
+      }
     } catch (error) {
       console.error('✗ Error loading analysis results:', error.message);
+      console.error('   Make sure you run "npm run analyze" first');
       throw error;
     }
   }
@@ -177,44 +189,64 @@ class VersionChecker {
     console.log('='.repeat(60));
 
     const enrichedResults = [];
+    let processedRepos = 0;
 
-    for (const repo of this.analysisResults) {
-      if (repo.status !== 'success' || repo.packages.length === 0) {
-        enrichedResults.push(repo);
-        continue;
+    try {
+      for (const repo of this.analysisResults) {
+        processedRepos++;
+        console.log(`\n[${processedRepos}/${this.analysisResults.length}] Processing: ${repo.repoName}`);
+        
+        if (repo.status !== 'success' || repo.packages.length === 0) {
+          console.log(`   ⚠️  Skipping (status: ${repo.status}, packages: ${repo.packages.length})`);
+          enrichedResults.push(repo);
+          continue;
+        }
+
+        console.log(`   📦 Checking ${repo.packages.length} packages...`);
+
+        try {
+          const packageResults = await this.checkPackageVersions(repo.packages);
+          
+          const outdated = packageResults.filter(p => p.needsUpdate).length;
+          const upToDate = packageResults.filter(p => p.status === 'up-to-date').length;
+          
+          console.log(`   ✓ Up to date: ${upToDate}`);
+          console.log(`   ⚠ Outdated: ${outdated}`);
+
+          enrichedResults.push({
+            ...repo,
+            packages: packageResults,
+            packageStats: {
+              total: packageResults.length,
+              upToDate,
+              outdated,
+              unknown: packageResults.filter(p => p.status === 'unknown').length,
+              errors: packageResults.filter(p => p.error).length
+            }
+          });
+        } catch (repoError) {
+          console.error(`   ✗ Error processing ${repo.repoName}:`, repoError.message);
+          // Add repo with error status
+          enrichedResults.push({
+            ...repo,
+            processingError: repoError.message
+          });
+        }
+
+        // Small delay to avoid rate limiting
+        await new Promise(resolve => setTimeout(resolve, 100));
       }
 
-      console.log(`\n📦 Checking packages for: ${repo.repoName}`);
-      console.log(`   Total packages: ${repo.packages.length}`);
+      console.log('\n' + '='.repeat(60));
+      console.log(`\n✓ Version check complete! Processed ${processedRepos}/${this.analysisResults.length} repositories`);
 
-      const packageResults = await this.checkPackageVersions(repo.packages);
-      
-      const outdated = packageResults.filter(p => p.needsUpdate).length;
-      const upToDate = packageResults.filter(p => p.status === 'up-to-date').length;
-      
-      console.log(`   ✓ Up to date: ${upToDate}`);
-      console.log(`   ⚠ Outdated: ${outdated}`);
-
-      enrichedResults.push({
-        ...repo,
-        packages: packageResults,
-        packageStats: {
-          total: packageResults.length,
-          upToDate,
-          outdated,
-          unknown: packageResults.filter(p => p.status === 'unknown').length,
-          errors: packageResults.filter(p => p.error).length
-        }
-      });
-
-      // Small delay to avoid rate limiting
-      await new Promise(resolve => setTimeout(resolve, 100));
+      return enrichedResults;
+    } catch (error) {
+      console.error('\n✗ Critical error in checkAllRepositories:', error.message);
+      console.error('Stack:', error.stack);
+      // Return whatever we have so far
+      return enrichedResults;
     }
-
-    console.log('\n' + '='.repeat(60));
-    console.log('\n✓ Version check complete!');
-
-    return enrichedResults;
   }
 
   async saveEnrichedResults(results) {
@@ -250,9 +282,14 @@ class VersionChecker {
 
 // Main execution
 async function main() {
+  console.log('\n' + '='.repeat(60));
+  console.log('🚀 NPM Package Version Checker');
+  console.log('='.repeat(60) + '\n');
+  
   const checker = new VersionChecker();
   
   try {
+    console.log('Step 1: Loading analysis results...');
     await checker.loadAnalysisResults();
     
     if (checker.analysisResults.length === 0) {
@@ -260,22 +297,26 @@ async function main() {
       process.exit(1);
     }
     
+    console.log('\nStep 2: Checking package versions...');
     const enrichedResults = await checker.checkAllRepositories();
     
+    console.log(`\nStep 3: Saving enriched results (${enrichedResults.length} repositories)...`);
     // Always save results, even if some packages failed
     await checker.saveEnrichedResults(enrichedResults);
+    
     console.log('\n✅ Version checking completed successfully!\n');
   } catch (error) {
-    console.error('\n❌ Version checking failed:', error.message);
+    console.error('\n❌ Version checking failed at:', error.message);
+    console.error('Error type:', error.constructor.name);
     console.error('Stack trace:', error.stack);
     
     // Try to save whatever results we have
-    if (checker.analysisResults.length > 0) {
+    if (checker.analysisResults && checker.analysisResults.length > 0) {
       console.log('\n⚠️  Attempting to save partial results...');
       try {
         const outputPath = path.join(DATA_DIR, 'enriched-results.json');
         await fs.writeJson(outputPath, checker.analysisResults, { spaces: 2 });
-        console.log('✓ Partial results saved');
+        console.log(`✓ Partial results saved to: ${outputPath}`);
       } catch (saveError) {
         console.error('✗ Failed to save partial results:', saveError.message);
       }
