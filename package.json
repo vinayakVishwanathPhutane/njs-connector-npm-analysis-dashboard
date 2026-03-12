@@ -7,7 +7,7 @@
   "scripts": {
     "analyze": "node src/analyzer.js",
     "serve": "node src/server.js",
-    "start": "npm run analyze && npm run serve"
+    "start": "node src/index.js && npm run serve"
   },
   "keywords": [
     "npm",
