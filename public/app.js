@@ -116,7 +116,7 @@ function createStatusChart() {
     charts.statusChart = new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: ['Up to Date', 'Outdated', 'Unknown'],
+            labels: ['Up to Date', 'UPDATE AVAILABLE', 'Unknown'],
             datasets: [{
                 data: [upToDate, outdated, unknown],
                 backgroundColor: ['#10b981', '#f59e0b', '#94a3b8'],
@@ -238,11 +238,20 @@ function renderRepositories() {
     const container = document.getElementById('repoList');
     if (!container) return;
 
-    container.innerHTML = allData.map(repo => `
-        <div class="repo-card" data-repo="${repo.repoName}">
+    container.innerHTML = allData.map(repo => {
+        const auditReport = repo.auditReport;
+        const hasVulnerabilities = auditReport?.vulnerabilities?.metadata?.vulnerabilities?.total > 0;
+        const vulnData = auditReport?.vulnerabilities?.metadata?.vulnerabilities || {};
+        const isDeprecated = repo.deprecated === true;
+        
+        return `
+        <div class="repo-card ${isDeprecated ? 'deprecated' : ''}" data-repo="${repo.repoName}">
             <div class="repo-header">
                 <div>
-                    <div class="repo-title">📁 ${repo.repoName}</div>
+                    <div class="repo-title">
+                        📁 ${repo.repoName}
+                        ${isDeprecated ? '<span class="deprecated-badge">DEPRECATED</span>' : ''}
+                    </div>
                     <div class="repo-url">${repo.repoUrl}</div>
                 </div>
                 <span class="status-badge ${repo.status}">${repo.status}</span>
@@ -259,9 +268,42 @@ function renderRepositories() {
                 </div>
                 <div class="repo-stat">
                     <span>⚠️</span>
-                    <span>Outdated: ${repo.packageStats?.outdated || 0}</span>
+                    <span>UPDATE AVAILABLE: ${repo.packageStats?.outdated || 0}</span>
                 </div>
             </div>
+
+            ${hasVulnerabilities ? `
+                <div class="vulnerability-summary">
+                    <div class="vuln-header">
+                        <span class="vuln-icon">🔒</span>
+                        <strong>Security Vulnerabilities: ${vulnData.total || 0}</strong>
+                    </div>
+                    <div class="vuln-badges">
+                        ${vulnData.critical > 0 ? `<span class="vuln-badge critical">Critical: ${vulnData.critical}</span>` : ''}
+                        ${vulnData.high > 0 ? `<span class="vuln-badge high">High: ${vulnData.high}</span>` : ''}
+                        ${vulnData.moderate > 0 ? `<span class="vuln-badge moderate">Moderate: ${vulnData.moderate}</span>` : ''}
+                        ${vulnData.low > 0 ? `<span class="vuln-badge low">Low: ${vulnData.low}</span>` : ''}
+                        ${vulnData.info > 0 ? `<span class="vuln-badge info">Info: ${vulnData.info}</span>` : ''}
+                    </div>
+                </div>
+
+                <div class="repo-vulnerabilities">
+                    <div class="repo-packages-header" onclick="toggleVulnerabilities('${repo.repoName}')">
+                        <h4>Vulnerability Details</h4>
+                        <span id="toggle-vuln-${repo.repoName}">▼</span>
+                    </div>
+                    <div id="vulnerabilities-${repo.repoName}" style="display: none;">
+                        ${renderVulnerabilityDetails(auditReport)}
+                    </div>
+                </div>
+            ` : `
+                <div class="vulnerability-summary success">
+                    <div class="vuln-header">
+                        <span class="vuln-icon">✅</span>
+                        <strong>No Known Vulnerabilities</strong>
+                    </div>
+                </div>
+            `}
 
             ${repo.packages && repo.packages.length > 0 ? `
                 <div class="repo-packages">
@@ -285,7 +327,7 @@ function renderRepositories() {
                                         <td><strong>${pkg.name}</strong></td>
                                         <td>${pkg.currentVersion}</td>
                                         <td>${pkg.latestVersion || 'N/A'}</td>
-                                        <td><span class="status-badge ${pkg.status}">${pkg.status}</span></td>
+                                        <td><span class="status-badge ${pkg.status}">${pkg.status === 'outdated' ? 'UPDATE AVAILABLE' : pkg.status}</span></td>
                                     </tr>
                                 `).join('')}
                             </tbody>
@@ -294,7 +336,96 @@ function renderRepositories() {
                 </div>
             ` : ''}
         </div>
-    `).join('');
+    `;
+    }).join('');
+}
+
+// Render vulnerability details
+function renderVulnerabilityDetails(auditReport) {
+    if (!auditReport?.vulnerabilities?.vulnerabilities) {
+        return '<p class="no-data">No vulnerability data available</p>';
+    }
+
+    const vulnerabilities = auditReport.vulnerabilities.vulnerabilities;
+    const vulnArray = Object.values(vulnerabilities);
+
+    return `
+        <div class="vulnerability-list">
+            ${vulnArray.map(vuln => {
+                const cveList = Array.isArray(vuln.via)
+                    ? vuln.via.filter(v => typeof v === 'object' && v.source)
+                    : [];
+                
+                return `
+                    <div class="vulnerability-item">
+                        <div class="vuln-item-header">
+                            <div>
+                                <strong class="vuln-package-name">${vuln.name}</strong>
+                                <span class="vuln-badge ${vuln.severity}">${vuln.severity.toUpperCase()}</span>
+                                ${vuln.isDirect ? '<span class="vuln-type-badge direct">Direct Dependency</span>' : '<span class="vuln-type-badge transitive">Transitive</span>'}
+                            </div>
+                            ${vuln.fixAvailable ? '<span class="fix-badge available">Fix Available</span>' : '<span class="fix-badge unavailable">No Fix Available</span>'}
+                        </div>
+
+                        ${vuln.via && vuln.via.length > 0 ? `
+                            <div class="vuln-via">
+                                <strong>Via:</strong> ${Array.isArray(vuln.via) ? vuln.via.map(v => typeof v === 'string' ? v : v.name).join(', ') : vuln.via}
+                            </div>
+                        ` : ''}
+
+                        ${cveList.length > 0 ? `
+                            <div class="cve-table-container">
+                                <table class="cve-table">
+                                    <thead>
+                                        <tr>
+                                            <th>CVE ID</th>
+                                            <th>Title</th>
+                                            <th>Severity</th>
+                                            <th>CVSS Score</th>
+                                            <th>CWE</th>
+                                            <th>Link</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${cveList.map(cve => `
+                                            <tr>
+                                                <td><code>GHSA-${cve.source}</code></td>
+                                                <td class="cve-title">${cve.title || 'N/A'}</td>
+                                                <td><span class="vuln-badge ${cve.severity}">${cve.severity}</span></td>
+                                                <td>${cve.cvss?.score || 'N/A'}</td>
+                                                <td>${cve.cwe ? cve.cwe.join(', ') : 'N/A'}</td>
+                                                <td>${cve.url ? `<a href="${cve.url}" target="_blank" class="cve-link">View</a>` : 'N/A'}</td>
+                                            </tr>
+                                        `).join('')}
+                                    </tbody>
+                                </table>
+                            </div>
+                        ` : ''}
+
+                        ${vuln.effects && vuln.effects.length > 0 ? `
+                            <div class="vuln-effects">
+                                <strong>Affects:</strong> ${vuln.effects.join(', ')}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }).join('')}
+        </div>
+    `;
+}
+
+// Toggle vulnerabilities
+function toggleVulnerabilities(repoName) {
+    const vulnDiv = document.getElementById(`vulnerabilities-${repoName}`);
+    const toggleIcon = document.getElementById(`toggle-vuln-${repoName}`);
+    
+    if (vulnDiv.style.display === 'none') {
+        vulnDiv.style.display = 'block';
+        toggleIcon.textContent = '▲';
+    } else {
+        vulnDiv.style.display = 'none';
+        toggleIcon.textContent = '▼';
+    }
 }
 
 // Toggle package list
@@ -628,6 +759,64 @@ function generateInsights() {
         });
     }
 
+    // Security vulnerabilities analysis
+    let totalVulnerabilities = 0;
+    let criticalVulns = 0;
+    let highVulns = 0;
+    let moderateVulns = 0;
+    let reposWithVulns = 0;
+
+    allData.forEach(repo => {
+        const vulnData = repo.auditReport?.vulnerabilities?.metadata?.vulnerabilities;
+        if (vulnData && vulnData.total > 0) {
+            reposWithVulns++;
+            totalVulnerabilities += vulnData.total || 0;
+            criticalVulns += vulnData.critical || 0;
+            highVulns += vulnData.high || 0;
+            moderateVulns += vulnData.moderate || 0;
+        }
+    });
+
+    // Add vulnerability insights
+    if (totalVulnerabilities === 0) {
+        insights.push({
+            type: 'success',
+            icon: '🔒',
+            title: 'No Security Vulnerabilities',
+            description: 'All repositories are free from known security vulnerabilities. Excellent security posture!'
+        });
+    } else if (criticalVulns > 0 || highVulns > 0) {
+        const criticalHighCount = criticalVulns + highVulns;
+        insights.push({
+            type: 'error',
+            icon: '🚨',
+            title: 'Critical Security Issues Detected',
+            description: `Found ${criticalHighCount} critical/high severity vulnerabilities across ${reposWithVulns} repository(ies). Immediate action required!`
+        });
+    } else if (moderateVulns > 0) {
+        insights.push({
+            type: 'warning',
+            icon: '⚠️',
+            title: 'Security Vulnerabilities Found',
+            description: `Found ${totalVulnerabilities} vulnerabilities (${moderateVulns} moderate) across ${reposWithVulns} repository(ies). Review and patch recommended.`
+        });
+    }
+
+    // Detailed vulnerability breakdown if any exist
+    if (totalVulnerabilities > 0) {
+        const vulnBreakdown = [];
+        if (criticalVulns > 0) vulnBreakdown.push(`${criticalVulns} critical`);
+        if (highVulns > 0) vulnBreakdown.push(`${highVulns} high`);
+        if (moderateVulns > 0) vulnBreakdown.push(`${moderateVulns} moderate`);
+        
+        insights.push({
+            type: 'info',
+            icon: '📊',
+            title: 'Vulnerability Breakdown',
+            description: `Total: ${totalVulnerabilities} vulnerabilities - ${vulnBreakdown.join(', ')}. Check the Repositories tab for detailed CVE information.`
+        });
+    }
+
     // Repository comparison
     const bestRepo = stats.repoStats?.reduce((best, repo) => {
         const score = repo.total > 0 ? (repo.upToDate / repo.total) : 0;
@@ -636,7 +825,7 @@ function generateInsights() {
     }, stats.repoStats[0]);
 
     if (bestRepo) {
-        const score = bestRepo.total > 0 
+        const score = bestRepo.total > 0
             ? ((bestRepo.upToDate / bestRepo.total) * 100).toFixed(0)
             : 0;
         
@@ -676,7 +865,8 @@ function updateLastUpdated(timestamp) {
     document.getElementById('updateTime').textContent = formatted;
 }
 
-// Make togglePackages available globally
+// Make functions available globally
 window.togglePackages = togglePackages;
+window.toggleVulnerabilities = toggleVulnerabilities;
 
 // Made with Bob

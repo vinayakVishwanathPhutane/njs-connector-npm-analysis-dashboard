@@ -3,6 +3,10 @@ import fs from 'fs-extra';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import { exec } from 'child_process';
+import { promisify } from 'util';
+
+const execAsync = promisify(exec);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -91,6 +95,113 @@ class RepositoryAnalyzer {
     return dependencies;
   }
 
+  async performSecurityAnalysis(repoPath) {
+    const packageRepo = path.join(repoPath, 'src/');
+    
+    try {
+      // Check if package.json exists in the src directory
+      const packageJsonPath = path.join(packageRepo, 'package.json');
+      if (!await fs.pathExists(packageJsonPath)) {
+        console.log(`. ⚠️  No package.json found for audit in ${path.basename(repoPath)}`);
+        return {
+          status: 'skipped',
+          message: `. ⚠️  No package.json found for audit in ${path.basename(repoPath)}`,
+          error: `No package.json found for audit`,
+          vulnerabilities: null
+        };
+      }
+
+      console.log(`. 🔍 Preparing for npm audit in ${path.basename(repoPath)}...`);
+      
+      // Step 1: Run npm install --package-lock-only to generate package-lock.json
+      // This creates the lock file without installing node_modules
+      try {
+        console.log(` 📦 Generating package-lock.json...`);
+        await execAsync('npm install --package-lock-only', {
+          cwd: packageRepo,
+          maxBuffer: 1024 * 1024 * 10 // 10MB buffer
+        });
+        console.log(`    ✓ Package lock file generated`);
+      } catch (installError) {
+        console.error(`    ✗ Error generating package-lock.json:`, installError.message);
+        return {
+          status: 'error',
+          message: `✗ Error generating package-lock.json:`,
+          error: `Failed to generate package-lock.json: ${installError.message}`,
+          vulnerabilities: null
+        };
+      }
+
+      // Step 2: Run npm audit with JSON output
+      console.log(`    🔍 Running npm audit...`);
+      
+      try {
+        const { stdout } = await execAsync('npm audit --json', {
+          cwd: packageRepo,
+          maxBuffer: 1024 * 1024 * 10 // 10MB buffer for large audit reports
+        });
+        
+        const auditData = JSON.parse(stdout);
+        
+        console.log(`✓ Audit completed - No vulnerabilities found`);
+        
+        return {
+          status: 'completed_with_vulnerabilities',
+          message: ` ✓ Audit completed - No vulnerabilities found`,
+          error: null,
+          vulnerabilities: auditData
+        };
+      } catch (auditError) {
+        // npm audit returns exit code 1 when vulnerabilities are found
+        // We still want to parse the JSON output
+        if (auditError.stdout) {
+          try {
+            const auditData = JSON.parse(auditError.stdout);
+            console.log("auditData", JSON.stringify(auditData.metadata));
+            
+            let vulnerabilityCount = auditData.metadata?.vulnerabilities.total || 0;
+            let criticalCount = auditData.metadata?.vulnerabilities.critical || 0;
+            let highCount = auditData.metadata?.vulnerabilities.high || 0;
+            
+            console.log(` ⚠️  Found ${vulnerabilityCount} vulnerabilities (Critical: ${criticalCount}, High: ${highCount})`);
+            
+            return {
+              status: 'completed_with_vulnerabilities',
+              message: `⚠️  Found ${vulnerabilityCount} vulnerabilities (Critical: ${criticalCount}, High: ${highCount})`,
+              error: null,
+              vulnerabilities: auditData
+            };
+          } catch (parseError) {
+            console.error(` ✗ Error parsing audit output:`, parseError.message);
+            return {
+              status: 'error',
+              message: "",
+              error: 'Failed to parse audit output',
+              vulnerabilities: null
+            };
+          }
+        }
+        
+        // If we can't parse the output, return error
+        console.error(`    ✗ Error running npm audit:`, auditError.message);
+        return {
+          status: 'error',
+          message: "",
+          error: auditError.message,
+          vulnerabilities: null
+        };
+      }
+    } catch (error) {
+      console.error(`    ✗ Unexpected error in security analysis:`, error.message);
+      return {
+        status: 'error',
+        message: "",
+        error: error.message,
+        vulnerabilities: null
+      };
+    }
+  }
+
   async analyzeRepository(repo) {
     console.log(`\n📦 Analyzing: ${repo.name}`);
     
@@ -104,12 +215,14 @@ class RepositoryAnalyzer {
         status: 'error',
         error: cloneResult.error,
         packages: [],
+        deprecated: repo.status === 'deprecated',
         timestamp: new Date().toISOString()
       };
     }
 
     const packageJson = await this.extractPackageJson(cloneResult.path);
     const dependencies = this.extractDependencies(packageJson);
+    const auditReport = await this.performSecurityAnalysis(cloneResult.path);
 
     console.log(`  ✓ Found ${dependencies.length} packages`);
 
@@ -119,7 +232,9 @@ class RepositoryAnalyzer {
       branch: repo.branch,
       status: 'success',
       packages: dependencies,
+      auditReport: auditReport,
       projectName: packageJson?.name || repo.name,
+      deprecated: repo.status === 'deprecated',
       projectVersion: packageJson?.version || 'unknown',
       timestamp: new Date().toISOString()
     };

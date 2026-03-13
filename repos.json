@@ -1,4 +1,9 @@
 [
+{
+    "name": "connector-njs-json-tools",
+    "url": "https://github.com/ibm-webmethods/connector-njs-json-tools.git",
+    "branch": "main"
+  },
   {
     "name": "connector-njs-lob",
     "url": "https://github.com/ibm-webmethods/connector-njs-lob.git",
@@ -102,7 +107,8 @@
   {
     "name": "connector-njs-addthis",
     "url": "https://github.com/ibm-webmethods/connector-njs-addthis.git",
-    "branch": "main"
+    "branch": "main",
+    "status":  "deprecated"
   },
   {
     "name": "connector-njs-cisco-webex-teams",
@@ -122,7 +128,8 @@
   {
     "name": "connector-njs-contentstack",
     "url": "https://github.com/ibm-webmethods/connector-njs-contentstack.git",
-    "branch": "main"
+    "branch": "main",
+    "status":  "deprecated"
   },
   {
     "name": "connector-njs-confluence-cloud-triggers",
@@ -237,7 +244,8 @@
   {
     "name": "connector-njs-freshsales",
     "url": "https://github.com/ibm-webmethods/connector-njs-freshsales.git",
-    "branch": "main"
+    "branch": "main",
+    "status":  "deprecated"
   },
   {
     "name": "connector-njs-intercom",
@@ -269,11 +277,7 @@
     "url": "https://github.com/ibm-webmethods/connector-njs-google-analytics.git",
     "branch": "main"
   },
-  {
-    "name": "connector-njs-json-tools",
-    "url": "https://github.com/ibm-webmethods/connector-njs-json-tools.git",
-    "branch": "main"
-  },
+  
   {
     "name": "connector-njs-google-calendar",
     "url": "https://github.com/ibm-webmethods/connector-njs-google-calendar.git",
@@ -392,7 +396,8 @@
   {
     "name": "connector-njs-pivotal-tracker",
     "url": "https://github.com/ibm-webmethods/connector-njs-pivotal-tracker.git",
-    "branch": "main"
+    "branch": "main",
+    "status":  "deprecated"
   },
   {
     "name": "connector-njs-microsoft-teams",
@@ -442,7 +447,8 @@
   {
     "name": "connector-njs-salesforce-actions",
     "url": "https://github.com/ibm-webmethods/connector-njs-salesforce-actions.git",
-    "branch": "main"
+    "branch": "main",
+    "status":  "deprecated"
   },
   {
     "name": "connector-njs-office365",
@@ -467,7 +473,8 @@
   {
     "name": "connector-njs-outreach",
     "url": "https://github.com/ibm-webmethods/connector-njs-outreach.git",
-    "branch": "main"
+    "branch": "main",
+    "status":  "deprecated"
   },
   {
     "name": "connector-njs-shopify",
@@ -557,7 +564,8 @@
   {
     "name": "connector-njs-twitter",
     "url": "https://github.com/ibm-webmethods/connector-njs-twitter.git",
-    "branch": "main"
+    "branch": "main",
+    "status":  "deprecated"
   },
   {
     "name": "connector-njs-uservoice",
