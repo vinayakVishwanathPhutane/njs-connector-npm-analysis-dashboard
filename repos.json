@@ -1,9 +1,4 @@
 [
-{
-    "name": "connector-njs-json-tools",
-    "url": "https://github.com/ibm-webmethods/connector-njs-json-tools.git",
-    "branch": "main"
-  },
   {
     "name": "connector-njs-lob",
     "url": "https://github.com/ibm-webmethods/connector-njs-lob.git",
@@ -22,11 +17,6 @@
   {
     "name": "connector-njs-aha-triggers",
     "url": "https://github.com/ibm-webmethods/connector-njs-aha-triggers.git",
-    "branch": "main"
-  },
-  {
-    "name": "connector-njs-aleph-alpha",
-    "url": "https://github.com/ibm-webmethods/connector-njs-aleph-alpha.git",
     "branch": "main"
   },
   {
@@ -105,12 +95,6 @@
     "branch": "main"
   },
   {
-    "name": "connector-njs-addthis",
-    "url": "https://github.com/ibm-webmethods/connector-njs-addthis.git",
-    "branch": "main",
-    "status":  "deprecated"
-  },
-  {
     "name": "connector-njs-cisco-webex-teams",
     "url": "https://github.com/ibm-webmethods/connector-njs-cisco-webex-teams.git",
     "branch": "main"
@@ -124,12 +108,6 @@
     "name": "connector-njs-confluence-cloud-actions",
     "url": "https://github.com/ibm-webmethods/connector-njs-confluence-cloud-actions.git",
     "branch": "main"
-  },
-  {
-    "name": "connector-njs-contentstack",
-    "url": "https://github.com/ibm-webmethods/connector-njs-contentstack.git",
-    "branch": "main",
-    "status":  "deprecated"
   },
   {
     "name": "connector-njs-confluence-cloud-triggers",
@@ -187,11 +165,6 @@
     "branch": "main"
   },
   {
-    "name": "connector-njs-egnyte",
-    "url": "https://github.com/ibm-webmethods/connector-njs-egnyte.git",
-    "branch": "main"
-  },
-  {
     "name": "connector-njs-eventbrite",
     "url": "https://github.com/ibm-webmethods/connector-njs-eventbrite.git",
     "branch": "main"
@@ -242,12 +215,6 @@
     "branch": "main"
   },
   {
-    "name": "connector-njs-freshsales",
-    "url": "https://github.com/ibm-webmethods/connector-njs-freshsales.git",
-    "branch": "main",
-    "status":  "deprecated"
-  },
-  {
     "name": "connector-njs-intercom",
     "url": "https://github.com/ibm-webmethods/connector-njs-intercom.git",
     "branch": "main"
@@ -272,12 +239,6 @@
     "url": "https://github.com/ibm-webmethods/connector-njs-jotform.git",
     "branch": "main"
   },
-  {
-    "name": "connector-njs-google-analytics",
-    "url": "https://github.com/ibm-webmethods/connector-njs-google-analytics.git",
-    "branch": "main"
-  },
-  
   {
     "name": "connector-njs-google-calendar",
     "url": "https://github.com/ibm-webmethods/connector-njs-google-calendar.git",
@@ -394,12 +355,6 @@
     "branch": "main"
   },
   {
-    "name": "connector-njs-pivotal-tracker",
-    "url": "https://github.com/ibm-webmethods/connector-njs-pivotal-tracker.git",
-    "branch": "main",
-    "status":  "deprecated"
-  },
-  {
     "name": "connector-njs-microsoft-teams",
     "url": "https://github.com/ibm-webmethods/connector-njs-microsoft-teams.git",
     "branch": "main"
@@ -445,12 +400,6 @@
     "branch": "main"
   },
   {
-    "name": "connector-njs-salesforce-actions",
-    "url": "https://github.com/ibm-webmethods/connector-njs-salesforce-actions.git",
-    "branch": "main",
-    "status":  "deprecated"
-  },
-  {
     "name": "connector-njs-office365",
     "url": "https://github.com/ibm-webmethods/connector-njs-office365.git",
     "branch": "main"
@@ -469,12 +418,6 @@
     "name": "connector-njs-servicenow",
     "url": "https://github.com/ibm-webmethods/connector-njs-servicenow.git",
     "branch": "main"
-  },
-  {
-    "name": "connector-njs-outreach",
-    "url": "https://github.com/ibm-webmethods/connector-njs-outreach.git",
-    "branch": "main",
-    "status":  "deprecated"
   },
   {
     "name": "connector-njs-shopify",
@@ -562,12 +505,6 @@
     "branch": "main"
   },
   {
-    "name": "connector-njs-twitter",
-    "url": "https://github.com/ibm-webmethods/connector-njs-twitter.git",
-    "branch": "main",
-    "status":  "deprecated"
-  },
-  {
     "name": "connector-njs-uservoice",
     "url": "https://github.com/ibm-webmethods/connector-njs-uservoice.git",
     "branch": "main"
@@ -635,11 +572,6 @@
   {
     "name": "connector-njs-zoho-projects",
     "url": "https://github.com/ibm-webmethods/connector-njs-zoho-projects.git",
-    "branch": "main"
-  },
-  {
-    "name": "connector-njs-abo-agent",
-    "url": "https://github.com/ibm-webmethods/connector-njs-abo-agent.git",
     "branch": "main"
   },
   {
